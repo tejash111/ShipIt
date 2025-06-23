@@ -14,4 +14,13 @@ export const callRegisterApi = async (formData) => {
   return response.data;
 };
 
-export const callLoginApi 
+export const callLoginApi = async (formData) =>{
+  const response = await axios.post(
+    "http://localhost:3000/api/user/login",
+    formData,
+    {
+      withCredentials:true
+    }
+  );
+  return response.data
+}

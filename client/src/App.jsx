@@ -2,10 +2,11 @@ import React from 'react'
 import { Button } from "@/components/ui/button"
 import { Route, Routes } from 'react-router-dom'
 import AuthPage from './pages/authPage'
-import TaskPage from './pages/TaskPage'
-import ScrumBoardPage from './pages/scrum-board'
 import Home from './pages/home'
 import { Toaster,toast } from 'sonner'
+import Kanban from './pages/kanban'
+import TasksPage from './pages'
+import ListPage from './pages/ListPage'
 
 const App = () => {
   return (
@@ -14,8 +15,11 @@ const App = () => {
     <Routes>
       
       <Route path='/home' element={<Home/>}/>
-      <Route path='/tasks/list' element={<TaskPage/>} />
-      <Route path='/tasks/scrumboard' element={<ScrumBoardPage/>} />
+      <Route path='/tasks' element={<TasksPage/>}>
+      <Route path='list' element={<ListPage/>} />
+      <Route path='kanban' element={<Kanban/>} />
+      </Route>
+      
     </Routes>
     </>
   )

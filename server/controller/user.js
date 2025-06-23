@@ -67,7 +67,7 @@ const loginUser  = async(req,res,next)=>{
     const getUser = await User.findOne({email})
 
     if (!getUser){
-      return res.json({
+      return res.status(401).json({
         success:false,
         message:"wrong email"
       })
@@ -75,7 +75,7 @@ const loginUser  = async(req,res,next)=>{
     const checkAuth = await bcrypt.compare(password,getUser.password);
 
     if (!checkAuth){
-      return res.json({
+      return res.status(401).json({
         success:false,
         message:"wrrong password"
 

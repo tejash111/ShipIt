@@ -4,15 +4,28 @@ import {Input} from "../../../components/ui/input"
 import {Button} from "../../../components/ui/button"
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { callLoginApi } from '../../../services'
+import { toast } from 'sonner'
+
 
 const SignIn = () => {
 
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
 
+  const data = {email,password}
+
   const handleSubmit = async(e)=>{
     e.preventDefault()
-    console.log({name,email});
+    try {
+      const response =await callLoginApi(data)
+      toast.success("login successfull")
+      navigate("/tasks/list")
+    } catch (error) {
+      console.log(error);
+      toast.error("some error occured")
+      
+    }
     
   }
 
