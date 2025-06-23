@@ -1,12 +1,26 @@
 const express = require('express')
 require('./database/index')
-const taskrouter = require('./routes/task')
+const cors = require("cors")
+const taskroutes = require('./routes/task')
+const userRoutes = require("./routes/user")
+const cookieParser = require("cookie-parser");
 
 const app = express()
 
+//middlewares
 app.use(express.json())
+app.use(cookieParser())
 
-app.use('/api/user',taskrouter)
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
+app.use('/api/user',taskroutes)
+app.use('/api/user/',userRoutes)
 
 app.use('/api',(req,res)=>{
     res.status(200).json({
