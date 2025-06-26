@@ -68,7 +68,13 @@ const SiderBar = () => {
                      <div>
                 <Button className={`hover:text-white border-1 w-60  ${selected === "kanban" ? "bg-black text-white" : "bg-white text-black"}`}   onClick={()=>HandleClick("/tasks/kanban","kanban")}>Kanban-View</Button>
             </div>
+
+             <div>
+                <Button className={`hover:text-white border-1 w-60  ${selected === "pomodoro" ? "bg-black text-white" : "bg-white text-black"}`}   onClick={()=>HandleClick("/tasks/pomodoro","pomodoro")}>Pomodoro</Button>
+            </div>
                  </div>
+
+                 
                 
                 
             

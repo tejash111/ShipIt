@@ -7,6 +7,7 @@ import { Toaster,toast } from 'sonner'
 import Kanban from './pages/kanban'
 import TasksPage from './pages'
 import ListPage from './pages/ListPage'
+import Pomodoro from './pages/timer'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
       <Route path='/tasks' element={<TasksPage/>}>
       <Route path='list' element={<ListPage/>} />
       <Route path='kanban' element={<Kanban/>} />
+      <Route path='pomodoro' element={<Pomodoro/>}/>
       </Route>
       
     </Routes>
