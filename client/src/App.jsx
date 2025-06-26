@@ -14,7 +14,7 @@ const App = () => {
     <Toaster position="top-right"/>
     <Routes>
       
-      <Route path='/home' element={<Home/>}/>
+      <Route path='/' element={<Home/>}/>
       <Route path='/tasks' element={<TasksPage/>}>
       <Route path='list' element={<ListPage/>} />
       <Route path='kanban' element={<Kanban/>} />

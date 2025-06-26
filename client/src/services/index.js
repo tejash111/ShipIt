@@ -24,3 +24,34 @@ export const callLoginApi = async (formData) =>{
   );
   return response.data
 }
+
+export const addNewTaskApi = async(formData)=>{
+  const response = await axios.post(
+    "http://localhost:3000/api/user/add-new-task",
+    formData,
+    {
+    withCredentials: true 
+  }
+  )
+  return response?.data;
+}
+
+export const fetchTackApi = async()=>{
+  const response = await axios.get(
+    "http://localhost:3000/api/user/get-all-task/",
+    {
+      withCredentials:true
+    }
+  )
+  return response?.data
+}
+
+export const deleteTaskApi = async(getCurrentTaskId)=>{
+  const response = await axios.delete(
+    `http://localhost:3000/api/user/delete-task/${getCurrentTaskId}`,
+    {
+      withCredentials:true
+    }
+  )
+  return response?.data
+}
