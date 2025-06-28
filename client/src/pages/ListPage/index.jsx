@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
@@ -20,41 +20,24 @@ import { Calendar } from "@/components/ui/calendar"
 import { IoIosFlag } from "react-icons/io";
 import { CiCalendarDate } from "react-icons/ci";
 import { BsCalendar2DateFill, BsFlag } from "react-icons/bs";
+import { globalContext } from '../../context';
+import { LuListTodo } from "react-icons/lu";
+import AddModal from '../../components/AddModal';
 
 
 const ListPage = () => {
 
   const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const [date,setDate]=useState(new Date())
-
+const {taskData,setTaskData,fetchTasks,fetchedData,setFetchedData,handleDelete}=useContext(globalContext)
+  console.log(fetchedData);
+  
   
   
   const d = new Date
-   const [isModalOpen, setIsModalOpen] = useState(false);
-   const [selectPriority,setSelectPriority]=useState(null);
-   const [taskData,setTaskData]=useState({
-       title: "",
-      description : "",
-       priority : "",
-       date:null
-    })
-    const [fetchedData,setFetchedData]=useState()
-
-   const handleAddBtn = ()=>{
-    setIsModalOpen(!isModalOpen)
-   }
-
   
 
-   const handleChange=(event)=>{
-   const {name,value} = event.target
-    setTaskData(prev=>({
-      ...prev,
-      [name]:value
-    })
-  )
-   }
-   console.log(taskData);
+  
    
 
    const handleSubmit= async(e)=>{
@@ -71,30 +54,12 @@ const ListPage = () => {
     
    }
    }
-   const handleDelete=async(getCurrentTaskId)=>{
-    try {
-      const res =await deleteTaskApi(getCurrentTaskId);
-    toast("Task deleted")
-    setFetchedData(prev => prev.filter(task => task._id !== getCurrentTaskId));
-    } catch (error) {
-      console.log(error);
-      toast.error("some error occured")
-    }
-   }
+   
 
 
-  const fetchTasks = async () => {
-    try {
-      const data = await fetchTackApi();
-      setFetchedData(data?.tasks) 
-    } catch (error) {
-      console.log("Failed to fetch tasks");
-    }
-  };
   useEffect(()=>{
-    fetchTasks();
+    fetchTasks()
   },[])
-  
 
 
 
@@ -143,76 +108,7 @@ const ListPage = () => {
             }
           </div>
           <div>
-          {
-            isModalOpen? 
-            <div className='border mt-5 p-4 rounded-2xl w-210'>
-              <form action="" onSubmit={handleSubmit}>
-                <div>
-                 <Input name="title" onChange={handleChange}  className="h-12 border-none w-200"placeholder="complete the project"/>
-                 <Input onChange={handleChange} className="h-8 w-200 border-none" name="description" placeholder="description"/>
-                 <div className='m-4 flex gap-2'>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                    <Button className="" variant="outline">{taskData.priority !==""? <div className='flex gap-1 font-light'><IoIosFlag className='mt-1'/>{taskData.priority}</div> : <div className='flex gap-2 font-light'><IoIosFlag className='mt-1'/> Priority</div> }</Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                    <DropdownMenuCheckboxItem
-                     onCheckedChange={() =>
-                      setTaskData((prev) => ({ ...prev, priority:  "High" }))
-                     }
-                    >
-                      <IoIosFlag className='text-red-600'/> High
-                    </DropdownMenuCheckboxItem>
-                    <DropdownMenuCheckboxItem
-                      onCheckedChange={() =>
-                     setTaskData((prev) => ({ ...prev, priority: "Medium" }))
-                     }
-                    >
-                     <IoIosFlag className='text-yellow-500'/> Medium
-                    </DropdownMenuCheckboxItem>
-                    <DropdownMenuCheckboxItem
-                     onCheckedChange={() =>
-                    setTaskData((prev) => ({ ...prev, priority: "Low" }))
-                    }
-                    >
-                      <IoIosFlag className='text-blue-600'/> Low
-                    </DropdownMenuCheckboxItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-
-                  <DropdownMenu className="">
-                    <DropdownMenuTrigger asChild>
-                    <Button className="" variant="outline">{taskData.date !== null ? <div className='flex gap-1 font-light'><CiCalendarDate className='mt-1'/> {taskData.date}</div>: <div className='flex gap-1 font-light'><CiCalendarDate className='mt-1'/> Date</div>}</Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="scale-80">
-                    <DropdownMenuCheckboxItem
-                    className="">
-                      <Calendar
-                       mode="single"
-                      selected={date}
-                      onSelect={(selectedDate) => {
-                      const fomatDate=selectedDate?.toDateString()
-                      setDate(selectedDate);
-                      setTaskData(prev => ({ ...prev, date: fomatDate }));
-                       }}
-                      className=" "
-                     captionLayout="dropdown"
-                      />
-                    </DropdownMenuCheckboxItem>
-                    
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                 </div >
-                 <div className='flex justify-end gap-2'>
-                 <Button onClick={()=>setIsModalOpen(false)}>Cancel</Button>
-                 <Button type="submit">Add Task</Button>
-                 </div>
-                 
-                </div>
-              </form>
-          </div>
-            : <Button className="mt-5" onClick={handleAddBtn}>+ Add Task</Button>
-          }
+          <AddModal/>
           </div>
         </div>
       </div>

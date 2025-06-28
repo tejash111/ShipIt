@@ -1,0 +1,43 @@
+.top-flip {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 2rem;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-top-left-radius: 0.125rem;
+  border-top-right-radius: 0.125rem;
+  text-align: center;
+  font-size: 1.75rem;
+  animation: flip-top 250ms ease-in;
+  transform-origin: bottom;
+  backface-visibility: hidden;
+}
+
+@keyframes flip-top {
+  100% {
+    transform: rotateX(90deg);
+  }
+}
+
+.bottom-flip {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2rem;
+  background-color: white;
+  border-bottom-left-radius: 0.125rem;
+  border-bottom-right-radius: 0.125rem;
+  text-align: center;
+  font-size: 1.75rem;
+  animation: flip-bottom 250ms ease-out 250ms;
+  transform-origin: top;
+  transform: rotateX(90deg);
+  backface-visibility: hidden;
+}
+
+@keyframes flip-bottom {
+  100% {
+    transform: rotateX(0deg);
+  }
+}

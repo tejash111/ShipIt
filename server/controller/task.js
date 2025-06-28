@@ -7,7 +7,8 @@ const Task = require('../models/task')
 //edit a task
 
 const addNewTask = async (req, res) => {
-    const { title, description, status, userId, priority } = req.body;
+    const { title, description, status, priority,date} = req.body;
+    const userId=req.userId
 
     //validate the schema
     try {
@@ -15,8 +16,9 @@ const addNewTask = async (req, res) => {
             title,
             description,
             status,
+            priority,
+            date,
             userId,
-            priority
         })
 
         if (newTask) {
@@ -42,9 +44,9 @@ const addNewTask = async (req, res) => {
 }
 
 const getAllTask = async (req,res) => {
-    const {id }=req.params
+    const userId=req.userId
     try {
-        const FetchAllTaskById = await Task.find({userId : id})
+        const FetchAllTaskById = await Task.find({userId })
 
         if (FetchAllTaskById){
             return res.status(201).json({
@@ -69,15 +71,17 @@ const getAllTask = async (req,res) => {
 }
 
 const updateTask = async(req,res) => {
-    const { title, description, status, priority, userId,_id } = req.body;
+    const { title, description, status, priority,_id } = req.body;
+    const userId = req.userId
     try {
-        const updatedTask =await Task.findByIdAndUpdate({   _id,
-      },
+        const updatedTask =await Task.findByIdAndUpdate( _id,
+      
       {
         title,
         description,
         status,
         priority,
+        date,
         userId,
       },
       { new: true })
@@ -106,6 +110,7 @@ const updateTask = async(req,res) => {
 
 const deleteTask = async(req,res)=>{
     const {id }=req.params;
+    const userId = req.userId;
 
     try {
         if (!id){
@@ -114,6 +119,14 @@ const deleteTask = async(req,res)=>{
                 message:"id is required"
             })
         }
+        const task =await Task.findById(id)
+
+         if (task.userId.toString() !== userId.toString()) {
+      return res.status(403).json({
+        success: false,
+        message: "Unauthorized to delete this task"
+      });
+    }
 
         const deletedTask =await Task.findByIdAndDelete(id);
 
