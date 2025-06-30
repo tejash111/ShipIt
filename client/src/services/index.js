@@ -49,6 +49,18 @@ export const fetchTackApi = async()=>{
 export const deleteTaskApi = async(getCurrentTaskId)=>{
   const response = await axios.delete(
     `http://localhost:3000/api/user/delete-task/${getCurrentTaskId}`,
+
+    {
+      withCredentials:true
+    }
+  )
+  return response?.data
+}
+
+export const updateTaskApi = async(formData)=>{
+  const response = await axios.put(
+    `http://localhost:3000/api/user/update-task`,
+    formData,
     {
       withCredentials:true
     }

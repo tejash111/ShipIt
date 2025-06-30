@@ -11,6 +11,8 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { addMonths, endOfMonth, startOfMonth, subDays, subMonths } from 'date-fns';
 import { globalContext } from '../../context';
 import AddModal from '../../components/AddModal';
+import { MdDelete } from 'react-icons/md';
+import { Button } from '../../components/ui/button';
 
 // Inline content
 const today = new Date();
@@ -35,7 +37,7 @@ const shortDateFormatter = new Intl.DateTimeFormat('en-US', {
 });
 
 const Kanban = () => {
-  const {taskData,setTaskData,fetchTasks,fetchedData,setFetchedData}=useContext(globalContext)
+  const {taskData,setTaskData,fetchTasks,fetchedData,setFetchedData,handleDelete}=useContext(globalContext)
   console.log(fetchedData);
   
   const [features, setFeatures] = useState(fetchedData);
@@ -90,20 +92,30 @@ const Kanban = () => {
                   id={feature._id}
                   className="cursor-pointer"
                 >
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex flex-col gap-1">
-                      <p className="m-0 flex-1 font-medium text-sm">
-                        {feature.title}
-                      </p>
+                  <div className="flex items-start  ">
+                    <div className=" gap-1">
+                     <div className='flex justify-between items-center '>
+                    <div className='flex-1 text-sm font-light'>{feature.title}</div> 
+                    <div className='flex justify-end'>
+                      <Button 
+                      onMouseDown={(e) => e.stopPropagation()}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                          e.preventDefault();
+                        handleDelete(feature._id);
+                          console.log("Delete clicked for:", feature._id);
+                    }} variant="ghost" className=""><MdDelete className=' '/></Button></div>   
+                    
+                    
+                     </div>
+                     
                       <p className="m-0 text-muted-foreground text-xs">
                         {feature.description}
                       </p>
                     </div>
                     
                   </div>
-                  <p className="m-0 text-muted-foreground text-xs">
-                    {feature.data}
-                  </p>
+                  
                 </KanbanCard>
               ))}
               

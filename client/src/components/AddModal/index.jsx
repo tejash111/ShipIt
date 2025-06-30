@@ -18,22 +18,30 @@ import { MdDelete } from "react-icons/md";
 import SiderBar from '../../components/sidebar';
 import { Calendar } from "@/components/ui/calendar"
 import { IoIosFlag } from "react-icons/io";
-import { CiCalendarDate } from "react-icons/ci";
+import { CiCalendarDate, CiEdit } from "react-icons/ci";
 import { BsCalendar2DateFill, BsFlag } from "react-icons/bs";
 import { globalContext } from '../../context';
 import { LuListTodo } from "react-icons/lu";
+import { FaRegEdit } from "react-icons/fa";
 
-const AddModal = () => {
-      const [date,setDate]=useState(new Date())
-    const {taskData,setTaskData,fetchTasks,fetchedData,setFetchedData}=useContext(globalContext)
+const AddModal = ({handleSubmit,modalOpen,setModalOpen,item,mode}) => {
+      const [date,setDate]=useState(null)
+    const {taskData,setTaskData,fetchTasks,fetchedData,setFetchedData,setIsModalOpen,isModalOpen}=useContext(globalContext)
        const d = new Date
-        const [isModalOpen, setIsModalOpen] = useState(false);
+        
         const [selectPriority,setSelectPriority]=useState(null);
         const bottomRef = useRef(null);
        
+       useEffect(() => {
+  if (item) {
+    setTaskData(item); // ✅ prefill modal with task details
+  }
+}, [item]);
+ 
      
         const handleAddBtn = ()=>{
-         setIsModalOpen(!isModalOpen)
+          
+         setModalOpen(!modalOpen)
            setTimeout(scrollToBottom, 100);
         }
      
@@ -51,33 +59,6 @@ const AddModal = () => {
        )
         }
        
-        
-     
-        const handleSubmit= async(e)=>{
-         e.preventDefault()
-        try {
-          const res = await addNewTaskApi(taskData);
-         toast.success("task added")
-         setIsModalOpen(false)
-         fetchTasks();
-         
-        } catch (error) {
-         console.log(error);
-         toast.error("some errro occured")
-         
-        }
-        }
-        const handleDelete=async(getCurrentTaskId)=>{
-         try {
-           const res =await deleteTaskApi(getCurrentTaskId);
-         toast("Task deleted")
-         setFetchedData(prev => prev.filter(task => task._id !== getCurrentTaskId));
-         } catch (error) {
-           console.log(error);
-           toast.error("some error occured")
-         }
-        }
-     
      
        useEffect(()=>{
          fetchTasks()
@@ -85,7 +66,7 @@ const AddModal = () => {
   return (
     <div>
          {
-            isModalOpen? 
+            modalOpen? 
             <div className='border mt-5 p-4 rounded-2xl w-210'>
               <form action="" onSubmit={handleSubmit}>
                 <div>
@@ -94,7 +75,7 @@ const AddModal = () => {
                  <div className='m-4 flex gap-2'>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                    <Button className="" variant="outline">{taskData.priority !==""? <div className='flex gap-1 font-light'><IoIosFlag className='mt-1'/>{taskData.priority}</div> : <div className='flex gap-2 font-light'><IoIosFlag className='mt-1'/> Priority</div> }</Button>
+                    <Button className="" variant="outline">{taskData?.priority !==""? <div className='flex gap-1 font-light'><IoIosFlag className='mt-1'/>{taskData?.priority}</div> : <div className='flex gap-2 font-light'><IoIosFlag className='mt-1'/> Priority</div> }</Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                     <DropdownMenuCheckboxItem
@@ -123,7 +104,7 @@ const AddModal = () => {
 
                   <DropdownMenu className="">
                     <DropdownMenuTrigger asChild>
-                    <Button className="" variant="outline">{taskData.date !== null ? <div className='flex gap-1 font-light'><CiCalendarDate className='mt-1'/> {taskData.date}</div>: <div className='flex gap-1 font-light'><CiCalendarDate className='mt-1'/> Date</div>}</Button>
+                    <Button className="" variant="outline">{taskData?.date !== null ? <div className='flex gap-1 font-light'><CiCalendarDate className='mt-1'/> {taskData?.date}</div>: <div className='flex gap-1 font-light'><CiCalendarDate className='mt-1'/> Date</div>}</Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="scale-80">
                     <DropdownMenuCheckboxItem
@@ -135,6 +116,7 @@ const AddModal = () => {
                       const fomatDate=selectedDate?.toDateString()
                       setDate(selectedDate);
                       setTaskData(prev => ({ ...prev, date: fomatDate }));
+                      required
                        }}
                       className=" "
                      captionLayout="dropdown"
@@ -146,7 +128,7 @@ const AddModal = () => {
 
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                    <Button className="" variant="outline">{taskData.status !==""? <div className='flex gap-1 font-light'><LuListTodo className='mt-1'/>{taskData.status}</div> : <div className='flex gap-2 font-light'><LuListTodo className='mt-1'/> Status</div> }</Button>
+                    <Button className="" variant="outline">{taskData?.status !==""? <div className='flex gap-1 font-light'><LuListTodo className='mt-1'/>{taskData?.status}</div> : <div className='flex gap-2 font-light'><LuListTodo className='mt-1'/> Status</div> }</Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                     <DropdownMenuCheckboxItem
@@ -174,7 +156,7 @@ const AddModal = () => {
                   </DropdownMenu>
                  </div >
                  <div className='flex justify-end gap-2'>
-                 <Button onClick={()=>setIsModalOpen(false)}>Cancel</Button>
+                 <Button onClick={()=>setModalOpen(false)}>Cancel</Button>
                  <Button type="submit">Add Task</Button>
                  </div>
                  
@@ -182,7 +164,7 @@ const AddModal = () => {
               </form>
               <div ref={bottomRef}></div>
           </div>
-            : <Button className="mt-5" onClick={handleAddBtn}>+ Add Task</Button>
+            : <Button className={mode === "add"?"mt-5" : ""} variant={mode === "add"?"":"ghost"} onClick={handleAddBtn}>{mode === "add"? "Add Task" : <CiEdit/> }</Button>
           }
     </div>
   )

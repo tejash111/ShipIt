@@ -6,11 +6,11 @@ import { Button } from '../components/ui/button';
 
 const TasksPage = () => {
   return (
-    <div className='bg-gray-50'>
+    <div className=''>
        
         <SidebarProvider>
           <SiderBar />
-          <SidebarTrigger className="bg-gray-100">
+          <SidebarTrigger className="">
            
           
   <Button className="block md:hidden" variant="ghost">☰</Button>

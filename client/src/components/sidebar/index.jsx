@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Calendar } from "@/components/ui/calendar"
 import { useState } from 'react'
 import { Button } from '../ui/button'
@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/sidebar"
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
+import { globalContext } from '../../context'
 
 {/* <Calendar
             mode="single"
@@ -27,11 +28,11 @@ import { useEffect } from 'react'
             
 
 const SiderBar = () => {
-    const [date,setDate]=useState(new Date())
+    
+    const {date1,setDate1}=useContext(globalContext)
      const [selected,setSelected]=useState("list")
     const navigate=useNavigate()
-    console.log(date);
-    
+
 
     const HandleClick=(path,btnId)=>{
         setSelected(btnId);
@@ -53,11 +54,19 @@ const SiderBar = () => {
             <SidebarMenu className="flex  items-center justify-center ">
             <Calendar
             mode="single"
-            selected={date}
-            onSelect={setDate}
+            selected={date1}
+            onSelect={(selectedDate) => {
+               const fomatDate=selectedDate?.toDateString()
+
+               setDate1(selectedDate);      
+                 }}
+
+                
             className="mt-4 scale-90 "
             captionLayout="dropdown"
             />
+
+            
 
                  
                  <div className='mt-4'>
