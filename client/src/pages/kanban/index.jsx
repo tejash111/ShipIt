@@ -13,6 +13,10 @@ import { globalContext } from '../../context';
 import AddModal from '../../components/AddModal';
 import { MdDelete } from 'react-icons/md';
 import { Button } from '../../components/ui/button';
+import { updateTaskApi } from '../../services';
+import { toast } from 'sonner';
+import { IoIosFlag } from 'react-icons/io';
+import { BsCalendar2DateFill } from 'react-icons/bs';
 
 // Inline content
 const today = new Date();
@@ -42,36 +46,40 @@ const Kanban = () => {
   
   const [features, setFeatures] = useState(fetchedData);
   console.log(features);
+
   
 
-  const handleDragEnd = ( event) => {
-    const { active, over } = event;
+  const handleDragEnd = (event) => {
+  const { active, over } = event;
+  if (!over) return;
 
-    if (!over) {
-      return;
-    }
+  const newStatus = over.id;
 
+  const updatedFeatures = features.map((feature) => {
+    if (feature._id === active.id) {
+      const updatedFeature = { ...feature, status: newStatus };
 
-    const newStatus = over.id;
-
-
-
-    
-
-    setFeatures(
-      features.map((feature) => {
-        if (feature._id === active.id) {
-          return { ...feature, status : newStatus };
+      
+      updateTaskApi(updatedFeature)
+        .then(() => toast.success("Task Updated"))
+        .catch((err) => {
+          toast.error("Update failed")
+          console.log(err)
         }
+        );
 
-        return feature;
-      })
-    );
-  };
+      return updatedFeature;
+    }
+    return feature;
+  });
+
+  setFeatures(updatedFeatures);
+};
+
 
  useEffect(()=>{
   fetchTasks()
- },[])
+ },[features])
 
   
 
@@ -94,23 +102,27 @@ const Kanban = () => {
                 >
                   <div className="flex items-start  ">
                     <div className=" gap-1">
-                     <div className='flex justify-between items-center '>
-                    <div className='flex-1 text-sm font-light'>{feature.title}</div> 
-                    <div className='flex justify-end'>
-                      <Button 
-                      onMouseDown={(e) => e.stopPropagation()}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                          e.preventDefault();
-                        handleDelete(feature._id);
-                          console.log("Delete clicked for:", feature._id);
-                    }} variant="ghost" className=""><MdDelete className=' '/></Button></div>   
-                    
-                    
+                     <div className='flex justify-between items-center gap-17 '>
+                    <div className='flex-1 text-sm font-light'>{feature?.title}</div> 
+                    <div className='font-light'>
+                                         {
+                                         
+                                     feature.priority === "High" ? (
+                                    <div className='flex gap-1'><IoIosFlag className='text-red-600 flex mt-1.5' /> {feature.priority}</div>
+                                     ) : feature.priority === "Medium" ? (
+                                     <div className='flex gap-1'><IoIosFlag className='text-yellow-500 flex mt-1.5'/> {feature.priority}</div>
+                                    ) : (<div className='flex gap-1'><IoIosFlag className='text-blue-600 flex mt-1.5 '/> {feature.priority}</div>)
+                                  }
+                                      </div> 
+                    <div className='flex gap-2'>
+                      <div className=''><BsCalendar2DateFill className='text-gray-700'/></div>
+                      
+                    {feature?.date}
+                    </div>   
                      </div>
                      
                       <p className="m-0 text-muted-foreground text-xs">
-                        {feature.description}
+                        {feature?.description}
                       </p>
                     </div>
                     

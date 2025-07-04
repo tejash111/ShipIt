@@ -62,6 +62,7 @@ const AddModal = ({handleSubmit,modalOpen,setModalOpen,item,mode}) => {
      
        useEffect(()=>{
          fetchTasks()
+         
        },[])
   return (
     <div>
@@ -70,8 +71,8 @@ const AddModal = ({handleSubmit,modalOpen,setModalOpen,item,mode}) => {
             <div className='border mt-5 p-4 rounded-2xl w-210'>
               <form action="" onSubmit={handleSubmit}>
                 <div>
-                 <Input name="title" onChange={handleChange}  className="h-12 border-none w-200"placeholder="complete the project"/>
-                 <Input onChange={handleChange} className="h-8 w-200 border-none" name="description" placeholder="description"/>
+                 <Input name="title" onChange={handleChange}  value={mode === "edit"? taskData?.title : ""}  className="h-12 border-none w-200" placeholder="complete the project"/>
+                 <Input onChange={handleChange} value={mode === "edit"? taskData?.description : ""} className="h-8 w-200 border-none" name="description" placeholder="description"/>
                  <div className='m-4 flex gap-2'>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

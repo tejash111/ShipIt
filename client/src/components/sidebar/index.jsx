@@ -18,19 +18,12 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { globalContext } from '../../context'
 
-{/* <Calendar
-            mode="single"
-            selected={date}
-            onSelect={setDate}
-            className=" "
-            captionLayout="dropdown"
-            /> */}
-            
+
 
 const SiderBar = () => {
     
-    const {date1,setDate1}=useContext(globalContext)
-     const [selected,setSelected]=useState("list")
+    const {date1,setDate1,selected,setSelected}=useContext(globalContext)
+   
     const navigate=useNavigate()
 
 
@@ -56,12 +49,9 @@ const SiderBar = () => {
             mode="single"
             selected={date1}
             onSelect={(selectedDate) => {
-               const fomatDate=selectedDate?.toDateString()
-
-               setDate1(selectedDate);      
-                 }}
-
-                
+            const fomatDate=selectedDate?.toDateString()
+           setDate1(selectedDate);      
+                 }}   
             className="mt-4 scale-90 "
             captionLayout="dropdown"
             />

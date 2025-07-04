@@ -16,6 +16,8 @@ const GlobalState = ({ children }) => {
     date: null
   })
 
+    const [selected,setSelected]=useState("abc")
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen1, setIsModalOpen1] = useState(null);
 
@@ -76,7 +78,7 @@ const GlobalState = ({ children }) => {
 
 
 
-  return <globalContext.Provider value={{ taskData, setTaskData, fetchTasks, fetchedData, setFetchedData, handleDelete, setDate1, date1, handleSubmit, isModalOpen, setIsModalOpen, handleUpdate, isModalOpen1, setIsModalOpen1 }}>
+  return <globalContext.Provider value={{ taskData, setTaskData, fetchTasks, fetchedData, setFetchedData, handleDelete, setDate1, date1, handleSubmit, isModalOpen, setIsModalOpen, handleUpdate, isModalOpen1, setIsModalOpen1 ,selected,setSelected}}>
     {children}
   </globalContext.Provider>
 }
