@@ -25,7 +25,6 @@ const AuthPage = () => {
 
     const handleSubmit=(e)=>{
         e.preventDefault()
-        console.log("safdlkh");
         
       navigate("/auth")
       
@@ -33,10 +32,10 @@ const AuthPage = () => {
   return (
     <div>
         
-    <Dialog>
+    <Dialog >
       
         <DialogTrigger asChild>
-          <Button variant="outline">Login/SignUp</Button>
+          <Button className="" variant="">Login/SignUp</Button>
         </DialogTrigger>
          <DialogContent className="sm:max-w-[425px]">
           <VisuallyHidden>

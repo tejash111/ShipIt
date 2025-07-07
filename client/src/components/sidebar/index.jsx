@@ -17,6 +17,7 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { globalContext } from '../../context'
+import ShipItLogo from '../ShipItLogo'
 
 
 
@@ -33,6 +34,7 @@ const SiderBar = () => {
     }
 
   useEffect(() => {
+    setSelected("list")
     navigate("/tasks/list");
   }, []);
   return (
@@ -41,7 +43,7 @@ const SiderBar = () => {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel><div className='flex p-4 mt-4'>
-            <img className='w-10 h-10' src="/applogo.svg" alt="" /><div className='text-xl'>𝙸𝚝</div>
+            <ShipItLogo/>
         </div></SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="flex  items-center justify-center ">

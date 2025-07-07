@@ -34,7 +34,7 @@ const AddModal = ({handleSubmit,modalOpen,setModalOpen,item,mode}) => {
        
        useEffect(() => {
   if (item) {
-    setTaskData(item); // ✅ prefill modal with task details
+    setTaskData(item); // 
   }
 }, [item]);
  
@@ -71,8 +71,8 @@ const AddModal = ({handleSubmit,modalOpen,setModalOpen,item,mode}) => {
             <div className='border mt-5 p-4 rounded-2xl w-210'>
               <form action="" onSubmit={handleSubmit}>
                 <div>
-                 <Input name="title" onChange={handleChange}  value={mode === "edit"? taskData?.title : ""}  className="h-12 border-none w-200" placeholder="complete the project"/>
-                 <Input onChange={handleChange} value={mode === "edit"? taskData?.description : ""} className="h-8 w-200 border-none" name="description" placeholder="description"/>
+                 <Input name="title" onChange={handleChange}  value= {taskData?.title|| ""}  className="h-12 border-none w-200" placeholder="complete the project"/>
+                 <Input onChange={handleChange} value={taskData?.description ||""} className="h-8 w-200 border-none" name="description" placeholder="description"/>
                  <div className='m-4 flex gap-2'>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

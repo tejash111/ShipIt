@@ -16,7 +16,7 @@ const GlobalState = ({ children }) => {
     date: null
   })
 
-    const [selected,setSelected]=useState("abc")
+  const [selected, setSelected] = useState("abc")
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen1, setIsModalOpen1] = useState(null);
@@ -60,6 +60,10 @@ const GlobalState = ({ children }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!taskData.date) {
+      toast.error("Please select a date before submitting.");
+      return;
+    }
     try {
       const res = await addNewTaskApi(taskData);
       toast.success("task added")
@@ -78,7 +82,7 @@ const GlobalState = ({ children }) => {
 
 
 
-  return <globalContext.Provider value={{ taskData, setTaskData, fetchTasks, fetchedData, setFetchedData, handleDelete, setDate1, date1, handleSubmit, isModalOpen, setIsModalOpen, handleUpdate, isModalOpen1, setIsModalOpen1 ,selected,setSelected}}>
+  return <globalContext.Provider value={{ taskData, setTaskData, fetchTasks, fetchedData, setFetchedData, handleDelete, setDate1, date1, handleSubmit, isModalOpen, setIsModalOpen, handleUpdate, isModalOpen1, setIsModalOpen1, selected, setSelected }}>
     {children}
   </globalContext.Provider>
 }

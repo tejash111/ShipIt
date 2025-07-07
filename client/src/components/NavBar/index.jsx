@@ -1,17 +1,16 @@
 import React from 'react'
 import AuthPage from '../../pages/authPage'
-
-
+import ShipItLogo from '../ShipItLogo'
 
 const NavBar = () => {
   return (
-    <div className='flex justify-between p-5'>
-        <div>
-            LOGO
-        </div>
-        <div>
-            <AuthPage/>
-        </div>
+    <div className='flex justify-between p-1 px-2'>
+      <div>
+       <ShipItLogo/>
+      </div>
+      <div className=''>
+        <AuthPage />
+      </div>
     </div>
   )
 }
