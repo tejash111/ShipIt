@@ -67,3 +67,13 @@ export const updateTaskApi = async(formData)=>{
   )
   return response?.data
 }
+
+export const logoutApi = async (req, res) => {
+  const response = await axios.post(
+    "http://localhost:3000/api/user/logout",
+    {},
+    { withCredentials: true }
+  );
+
+  return response?.data;
+};

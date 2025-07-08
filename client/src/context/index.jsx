@@ -23,6 +23,7 @@ const GlobalState = ({ children }) => {
 
   const [date1, setDate1] = useState(new Date())
   const [fetchedData, setFetchedData] = useState()
+  const [allTime, setAllTime] = useState(false)
 
   const fetchTasks = async () => {
     try {
@@ -58,10 +59,31 @@ const GlobalState = ({ children }) => {
     }
   }
 
+  const updateTaskStatus = async (taskId, newStatus) => {
+    try {
+      const updatedTask = { ...fetchedData.find(t => t._id === taskId), status: newStatus };
+      await updateTaskApi(updatedTask);
+      setFetchedData(prev =>
+        prev.map(t => t._id === taskId ? { ...t, status: newStatus } : t)
+      );
+      toast.success("Task updated");
+    } catch (error) {
+      toast.error("Failed to update task");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!taskData.date) {
       toast.error("Please select a date before submitting.");
+      return;
+    }
+    if (!taskData.status) {
+      toast.error("Please select a status before submitting.");
+      return;
+    }
+    if (!taskData.title) {
+      toast.error("Please select a title before submitting.");
       return;
     }
     try {
@@ -82,7 +104,7 @@ const GlobalState = ({ children }) => {
 
 
 
-  return <globalContext.Provider value={{ taskData, setTaskData, fetchTasks, fetchedData, setFetchedData, handleDelete, setDate1, date1, handleSubmit, isModalOpen, setIsModalOpen, handleUpdate, isModalOpen1, setIsModalOpen1, selected, setSelected }}>
+  return <globalContext.Provider value={{ taskData, setTaskData, fetchTasks, fetchedData, setFetchedData, handleDelete, setDate1, date1, handleSubmit, isModalOpen, setIsModalOpen, handleUpdate, isModalOpen1, setIsModalOpen1, selected, setSelected, allTime, setAllTime, updateTaskStatus }}>
     {children}
   </globalContext.Provider>
 }

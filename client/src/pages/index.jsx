@@ -6,7 +6,7 @@ import { Button } from '../components/ui/button';
 
 const TasksPage = () => {
   return (
-    <div className=''>
+    <div className="bg-[url('/bg.jpg')]">
        
         <SidebarProvider>
           <SiderBar />

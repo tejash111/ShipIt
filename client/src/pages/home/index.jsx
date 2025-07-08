@@ -83,14 +83,14 @@ const Home = () => {
   ]
 
   return (
-    <div className="bg-white min-h-screen ">
-      <div className="fixed top-0 left-0 right-0 z-50 p-1 rounded-2xl mt-2 ml-3 mr-3 bg-gray-100 border border-gray-100 shadow-2xl ">
+    <div className="bg-[url('/bg.jpg')] min-h-screen ">
+      <div className="fixed top-0 left-0 right-0 z-50 p-1 rounded-2xl mt-2 ml-3 mr-3  border border-gray-100 shadow-2xl ">
         <NavBar />
       </div>
 
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-white"></div>
+        <div className=""></div>
         <div className="container mx-auto px-4 py-20 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 bg-gray-100 text-black px-4 py-2 rounded-full text-sm font-medium mb-6">
@@ -122,7 +122,7 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gray-100">
+      <section className="py-16 border-gray-300 border mx-8 rounded-2xl ">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -149,7 +149,7 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="bg-white  shadow-lg hover:shadow-md transition-all duration-300 group">
+              <Card key={index} className="  shadow-lg hover:shadow-md transition-all duration-300 group">
                 <CardContent className="p-8">
                   <div className="w-16 h-16 bg-gray-200 rounded-2xl flex items-center justify-center text-black mb-6 group-hover:scale-110 transition-transform duration-300">
                     {feature.icon}
@@ -164,33 +164,35 @@ const Home = () => {
       </section>
 
       {/* Demo Section */}
-      <section className="py-20 bg-gray-900">
-        <div className="container mx-auto px-4">
+      
+      <section className="py-17 ">
+      <hr className='mt-3 shadow-lg '/>
+        <div className="container mx-auto px-4 mt-3">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
                 See ShipIt in action
               </h2>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+              <p className="text-xl text-black mb-8 leading-relaxed">
                 Experience the intuitive interface that makes task management effortless.
                 From simple to-do lists to complex project workflows, ShipIt adapts to your needs.
               </p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-white" />
-                  <span className="text-gray-100">Drag & drop task organization</span>
+                  <CheckCircle2 className="w-6 h-6 text-black" />
+                  <span className="text-black">Drag & drop task organization</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-white" />
-                  <span className="text-gray-100">Real-time collaboration</span>
+                  <CheckCircle2 className="w-6 h-6 text-black" />
+                  <span className="text-black">Real-time collaboration</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-white" />
-                  <span className="text-gray-100">Advanced analytics & insights</span>
+                  <CheckCircle2 className="w-6 h-6 text-black" />
+                  <span className="text-black">Advanced analytics & insights</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-white" />
-                  <span className="text-gray-100">Cross-platform sync</span>
+                  <CheckCircle2 className="w-6 h-6 text-black" />
+                  <span className="text-black">Cross-platform sync</span>
                 </div>
               </div>
             </div>
@@ -221,10 +223,11 @@ const Home = () => {
             </div>
           </div>
         </div>
+        <hr className='mt-3 shadow-2xl'/>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-gray-100">
+      <section className="py-20 ">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
@@ -237,7 +240,7 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="bg-white  shadow-lg">
+              <Card key={index} className="  shadow-lg">
                 <CardContent className="p-8">
                   <div className="flex gap-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (

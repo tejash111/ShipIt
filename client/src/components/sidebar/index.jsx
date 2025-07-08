@@ -18,14 +18,17 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { globalContext } from '../../context'
 import ShipItLogo from '../ShipItLogo'
+import { logoutApi } from '../../services'
+import { toast } from 'sonner'
 
 
 
 const SiderBar = () => {
     
-    const {date1,setDate1,selected,setSelected}=useContext(globalContext)
+    const {date1,setDate1,selected,setSelected,allTime,setAllTime}=useContext(globalContext)
    
     const navigate=useNavigate()
+    
 
 
     const HandleClick=(path,btnId)=>{
@@ -33,31 +36,47 @@ const SiderBar = () => {
         navigate(path);
     }
 
+    const handleLogOut=async()=>{
+    try {
+      logoutApi()
+      navigate("/")
+      toast.success("Logout Sucessfull")
+    } catch (error) {
+        console.log(error);
+        toast.error("some error occured")
+        
+    }
+    }
+
   useEffect(() => {
     setSelected("list")
     navigate("/tasks/list");
   }, []);
   return (
-    <div className=''>
+    <div className="bg-[url('/bg.jpg')]">
         <Sidebar>
-      <SidebarContent>
+      <SidebarContent className="bg-[url('/bg.jpg')]">
         <SidebarGroup>
           <SidebarGroupLabel><div className='flex p-4 mt-4'>
             <ShipItLogo/>
         </div></SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="flex  items-center justify-center ">
+              <Button onClick={()=>setAllTime(!allTime)} variant={!allTime?"outline" : ""} className="mt-4">All Tasks</Button>
             <Calendar
             mode="single"
-            selected={date1}
+            selected={!allTime?date1 : null}
             onSelect={(selectedDate) => {
+              setAllTime(false)
             const fomatDate=selectedDate?.toDateString()
            setDate1(selectedDate);      
                  }}   
-            className="mt-4 scale-90 "
+            className=" scale-90 rounded-2xl bg-gray-100"
             captionLayout="dropdown"
             />
-
+            <div>
+              WorkSpace
+            </div>
             
 
                  
@@ -83,7 +102,7 @@ const SiderBar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter ><Button>Logout</Button></SidebarFooter>
+      <Button onClick={handleLogOut} className="flex items-end ">Logout</Button>
     </Sidebar>
     </div>
   )
