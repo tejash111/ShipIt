@@ -13,15 +13,13 @@ app.use(cookieParser())
 
 app.use(
   cors({
-    origin: ["http://localhost:5173",
-      "https://ship-it-one.vercel.app"
-    ],
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
 
-app.use('/api/user',taskroutes)
+app.use('/api/user/',taskroutes)
 app.use('/api/user/',userRoutes)
 
 app.use('/api',(req,res)=>{

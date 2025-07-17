@@ -34,7 +34,9 @@ const RegisterUser = async(req,res,next)=>{
 
         res.cookie("token",token,{
           withCredentials:true,
-          httpOnly:false,
+          httpOnly:true,
+          sameSite : none,
+          secure:true,
           maxAge:3 * 24 * 60 * 60 * 1000
         });
 
@@ -84,8 +86,10 @@ const loginUser  = async(req,res,next)=>{
     const token = generateToken(getUser?._id);
     res.cookie("token",token,{
       withCredentials:true,
-      httpOnly:false,
-      maxAge:3 * 24 * 60 * 60 * 1000
+          httpOnly:true,
+          sameSite : none,
+          secure:true,
+          maxAge:3 * 24 * 60 * 60 * 1000
     })
 
     res.status(201).json({
