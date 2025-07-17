@@ -50,7 +50,7 @@ const AuthPage = () => {
         }
       <div className='text-sm flex items-center justify-center'>
         New to ShipIt? 
-        <Link to><span onClick={()=>setIsLoginView(!isLoginView)}  className='flex px-2 text-blue-800 font-normal'>SignUp</span></Link>
+        <Link to><span onClick={()=>setIsLoginView(!isLoginView)}  className='flex px-2 text-blue-800 font-normal'>{isLoginView? "SignUp" : "SignIn"}</span></Link>
         
     </div>
       </DialogContent>

@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const callRegisterApi = async (formData) => {
   const response = await axios.post(
-    "http://localhost:3000/api/user/register",
+    "https://ship-it-f4mu.onrender.com/api/user/register",
     formData,
     {
       withCredentials: true, 
@@ -16,7 +16,7 @@ export const callRegisterApi = async (formData) => {
 
 export const callLoginApi = async (formData) =>{
   const response = await axios.post(
-    "http://localhost:3000/api/user/login",
+    "https://ship-it-f4mu.onrender.com/api/user/login",
     formData,
     {
       withCredentials:true
@@ -27,7 +27,7 @@ export const callLoginApi = async (formData) =>{
 
 export const addNewTaskApi = async(formData)=>{
   const response = await axios.post(
-    "http://localhost:3000/api/user/add-new-task",
+    "https://ship-it-f4mu.onrender.com/api/user/add-new-task",
     formData,
     {
     withCredentials: true 
@@ -38,7 +38,7 @@ export const addNewTaskApi = async(formData)=>{
 
 export const fetchTackApi = async()=>{
   const response = await axios.get(
-    "http://localhost:3000/api/user/get-all-task/",
+    "https://ship-it-f4mu.onrender.com/api/user/get-all-task/",
     {
       withCredentials:true
     }
@@ -48,7 +48,7 @@ export const fetchTackApi = async()=>{
 
 export const deleteTaskApi = async(getCurrentTaskId)=>{
   const response = await axios.delete(
-    `http://localhost:3000/api/user/delete-task/${getCurrentTaskId}`,
+    `https://ship-it-f4mu.onrender.com/api/user/delete-task/${getCurrentTaskId}`,
 
     {
       withCredentials:true
@@ -59,7 +59,7 @@ export const deleteTaskApi = async(getCurrentTaskId)=>{
 
 export const updateTaskApi = async(formData)=>{
   const response = await axios.put(
-    `http://localhost:3000/api/user/update-task`,
+    `https://ship-it-f4mu.onrender.com/api/user/update-task`,
     formData,
     {
       withCredentials:true
@@ -70,7 +70,7 @@ export const updateTaskApi = async(formData)=>{
 
 export const logoutApi = async (req, res) => {
   const response = await axios.post(
-    "http://localhost:3000/api/user/logout",
+    "https://ship-it-f4mu.onrender.com/api/user/logout",
     {},
     { withCredentials: true }
   );
