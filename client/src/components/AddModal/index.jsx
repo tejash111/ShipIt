@@ -77,11 +77,11 @@ const AddModal = ({ handleSubmit, modalOpen, setModalOpen, item, mode }) => {
     <div>
       {
         modalOpen ?
-          <div className='border mt-5 p-4 rounded-2xl w-210'>
+          <div className='border mt-5 p-4 rounded-2xl w-full  md:w-210'>
             <form action="" onSubmit={handleSubmit}>
-              <div>
-                <Input name="title" onChange={handleChange} value={taskData?.title || ""} className="h-12 border-none w-200" placeholder="complete the project" />
-                <Input onChange={handleChange} value={taskData?.description || ""} className="h-8 w-200 border-none" name="description" placeholder="description" />
+              <div className=''>
+                <Input name="title" onChange={handleChange} value={taskData?.title || ""} className="h-12 border-none w-full sm:w-200" placeholder="complete the project" />
+                <Input onChange={handleChange} value={taskData?.description || ""} className="h-8 w-full sm:w-200 border-none" name="description" placeholder="description" />
                 <div className='m-4 flex gap-2'>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -174,7 +174,7 @@ const AddModal = ({ handleSubmit, modalOpen, setModalOpen, item, mode }) => {
             </form>
             <div ref={bottomRef}></div>
           </div>
-          : <Button className={mode === "add" ? "mt-5" : ""} variant={mode === "add" ? "" : "ghost"} onClick={handleAddBtn}>{mode === "add" ? "Add Task" : <CiEdit />}</Button>
+          : <Button className={mode === "add" ? "mt-5 w-full sm:w-auto mx-auto" : ""} variant={mode === "add" ? "" : "ghost"} onClick={handleAddBtn}>{mode === "add" ? "Add Task" : <CiEdit />}</Button>
       }
     </div>
   )

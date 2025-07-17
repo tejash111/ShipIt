@@ -91,61 +91,53 @@ const Pomodoro = () => {
   if (seconds < 10) seconds = '0' + seconds
 
   return (
-        <div className='flex justify-center p-7 w-full items-center'>
-          <div >
-            <div className='w-100'>
-              <CircularProgressbar styles={buildStyles({ trailColor: "#", pathColor: mode==="work"?"#000" : "#06c258",textColor:"#000" })} className='' value={percentage} text={minutes + ':' + seconds} />
-            </div>
-            <div className='flex justify-center mt-10 scale-150 mb-7'>
-              {
-                isPaused ? <FaPlay onClick={() => setIsPaused(!isPaused)} className='cursor-pointer ' /> : <FaPause onClick={() => setIsPaused(!isPaused)} className='cursor-pointer' />
-              }
-
-            </div>
-            <div className='flex justify-center  mt-4'>
-            <Dialog>
-        
-        <DialogTrigger asChild>
-          <IoSettingsSharp className='cursor-pointer scale-150' />
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle className="flex">Setting</DialogTitle>
-            <DialogDescription>
-            </DialogDescription>
-          </DialogHeader>
-          <div className='w-full flex justify-center p-3 items-center'>
-        <div className='flex flex-col'>
-          <label className='mb-4 text-xl'>work minutes: {workValue[0]}:00</label>
-          <Slider
-            value={workValue}
-            onValueChange={setWorkValue}
-            max={180} step={1} className="w-60 "
-          />
-
-          <label className='m-4 text-xl flex '>break minutes: {breakValue[0]}:00</label>
-          <Slider
-            value={breakValue}
-            onValueChange={setBreakValue}
-            max={60} step={1} className="w-60 "
-          />
+    <div className="flex flex-col justify-center items-center p-4 sm:p-7 w-full min-h-screen backdrop-blur-[10px]">
+      <div>
+        <div className="w-full max-w-xs sm:w-100 mx-auto">
+          <CircularProgressbar styles={buildStyles({ trailColor: "#", pathColor: mode === "work" ? "#000" : "#06c258", textColor: "#000" })} className='' value={percentage} text={minutes + ':' + seconds} />
+        </div>
+        <div className="flex justify-center mt-6 sm:mt-10 scale-125 sm:scale-150 mb-5 sm:mb-7">
+          {
+            isPaused ? <FaPlay onClick={() => setIsPaused(!isPaused)} className='cursor-pointer ' /> : <FaPause onClick={() => setIsPaused(!isPaused)} className='cursor-pointer' />
+          }
+        </div>
+        <div className='flex justify-center mt-4'>
+          <Dialog>
+            <DialogTrigger asChild>
+              <IoSettingsSharp className='cursor-pointer scale-150' />
+            </DialogTrigger>
+            <DialogContent className="w-full max-w-xs sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle className="flex">Setting</DialogTitle>
+                <DialogDescription>
+                </DialogDescription>
+              </DialogHeader>
+              <div className='w-full flex justify-center p-3 items-center'>
+                <div className='flex flex-col w-full'>
+                  <label className='mb-4 text-xl'>work minutes: {workValue[0]}:00</label>
+                  <Slider
+                    value={workValue}
+                    onValueChange={setWorkValue}
+                    max={180} step={1} className="w-full sm:w-60"
+                  />
+                  <label className='m-4 text-xl flex '>break minutes: {breakValue[0]}:00</label>
+                  <Slider
+                    value={breakValue}
+                    onValueChange={setBreakValue}
+                    max={60} step={1} className="w-full sm:w-60"
+                  />
+                </div>
+              </div>
+              <DialogFooter>
+                <DialogClose asChild>
+                </DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
-          <DialogFooter>
-            <DialogClose asChild>
-             
-            </DialogClose>
-          
-          </DialogFooter>
-        </DialogContent>
-      
-    </Dialog>
-              
-            </div>
-          </div>
-
-        </div>
-      )
+    </div>
+  )
 
 }
 

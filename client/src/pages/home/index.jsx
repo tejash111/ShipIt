@@ -84,7 +84,7 @@ const Home = () => {
 
   return (
     <div className="bg-[url('/bg.jpg')] min-h-screen ">
-      <div className="fixed top-0 left-0 right-0 z-50 p-1 rounded-2xl mt-2 ml-3 mr-3  border border-gray-100 shadow-2xl ">
+      <div className="fixed top-0 left-0 right-0 z-50 p-1 rounded-2xl mt-2 ml-3 mr-3  border border-gray-100 shadow-2xl backdrop-blur-[2px]">
         <NavBar />
       </div>
 
@@ -122,7 +122,7 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 border-gray-300 border mx-8 rounded-2xl ">
+      <section className="py-16 border-gray-300 border mx-8 rounded-2xl backdrop-blur-[6px]">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -149,7 +149,7 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="  shadow-lg hover:shadow-md transition-all duration-300 group">
+              <Card key={index} className="  shadow-lg hover:shadow-md transition-all duration-300 group backdrop-blur-[6px]">
                 <CardContent className="p-8">
                   <div className="w-16 h-16 bg-gray-200 rounded-2xl flex items-center justify-center text-black mb-6 group-hover:scale-110 transition-transform duration-300">
                     {feature.icon}
@@ -167,7 +167,7 @@ const Home = () => {
       
       <section className="py-17 ">
       <hr className='mt-3 shadow-lg '/>
-        <div className="container mx-auto px-4 mt-3">
+        <div className="container mx-auto px-4 mt-3 backdrop-blur-[8px]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
@@ -240,7 +240,7 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="  shadow-lg">
+              <Card key={index} className="  shadow-lg backdrop-blur-[6px]">
                 <CardContent className="p-8">
                   <div className="flex gap-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (

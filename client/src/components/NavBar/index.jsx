@@ -4,7 +4,7 @@ import ShipItLogo from '../ShipItLogo'
 
 const NavBar = () => {
   return (
-    <div className='flex justify-between p-1 px-2'>
+    <div className='flex justify-between p-1 px-2 '>
       <div>
        <ShipItLogo/>
       </div>
