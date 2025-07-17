@@ -33,7 +33,6 @@ const RegisterUser = async(req,res,next)=>{
         const token = generateToken(newlyCreatedUser?._id)
 
         res.cookie("token",token,{
-          withCredentials:true,
           httpOnly:true,
           secure:true,
           sameSite: "None",
@@ -49,7 +48,6 @@ const RegisterUser = async(req,res,next)=>{
             _id:newlyCreatedUser._id
           }
         })
-        next();
       }
     }
   } catch (error) {
@@ -85,7 +83,6 @@ const loginUser  = async(req,res,next)=>{
     }
     const token = generateToken(getUser?._id);
     res.cookie("token",token,{
-      withCredentials:true,
           httpOnly:true,
           secure:true,
           sameSite: "None",

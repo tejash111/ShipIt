@@ -45,7 +45,7 @@ const SignUp = () => {
       </div>
       <div className='mt-3'>
         <label htmlFor="">Email</label>
-        <Input className="mt-2" type="email" name='email' placeholder='johndoe@gmail.com' value={signUpData.email} onChange={handleChange}/>
+        <Input className="mt-4" type="email" name='email' placeholder='johndoe@gmail.com' value={signUpData.email} onChange={handleChange}/>
       </div>
       <div className='mt-3'>
         <label htmlFor="">Password</label>

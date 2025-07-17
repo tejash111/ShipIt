@@ -36,14 +36,14 @@ const SignIn = () => {
       <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="">Email</label>
-        <Input className="mt-2" type="email" name='email' placeholder='johndoe@gmail.com' value={email} onChange={(e)=>setEmail(e.target.value)}/>
+        <Input className="mt-2 w-85 md:w-95" type="email" name='email' placeholder='johndoe@gmail.com' value={email} onChange={(e)=>setEmail(e.target.value)}/>
       </div>
       <div className='mt-3'>
         <label htmlFor="">Password</label>
-        <Input className="mt-2" type="password" name='password' placeholder='********' value={password} onChange={(e)=>setPassword(e.target.value)} />
+        <Input className="mt-2 w-85 md:w-95" type="password" name='password' placeholder='********' value={password} onChange={(e)=>setPassword(e.target.value)} />
       </div>
       <div className="mt-4 flex items-center justify-center sm:justify-center sm:item">
-      <Button className="w-95" type="submit" >Login</Button>
+      <Button className="w-full" type="submit" >Login</Button>
       </div>
       
       </form>
